@@ -1,72 +1,76 @@
 import random
 
 def check_a(b, d):
+    checker = random.uniform(0,1)
     if(b and d):
-        # 0.8873239437
-        return True
+        return checker <= 0.8873239437
     if(not b and d):
-        # 0.2727272727
-        return False
+        return checker <= 0.2727272727
     if(not b and not d):
-        # 0.8571428571
-        return True
+        return checker <= 0.8571428571
     if(b and not d):
-        # 0.9921259843
-        return True
+        return checker <= 0.9921259843
 
 def check_b(a):
+    checker = random.uniform(0,1)
     if(a):
-        # 0.1
-        return False
+        return checker <= 0.7
     if not a:
-        # 0.7
-        return True
+        return checker <= 0.1
 
 def check_d(a, e):
+    checker = random.uniform(0,1)
     if(a and e):
-        # 0.02702
-        return False
+        return checker <= 0.02702
     if(not a and e):
-        # 0.30769
-        return False
+        return checker <= 0.30769
     if(a and not e):
-        # 0.6923
-        return True
+        return checker <= 0.6923
     if(not a and not e):
-        # 0.973
-        return True
+        return checker <= 0.973
 
 def check_e(d):
+    checker = random.uniform(0,1)
     if d:
-        # 0.1
-        return False
+        return checker <= 0.1
     if not d:
-        # 0.9
-        return True
+        return checker <= 0.9
 
-a_counter = 0
-b_counter = 0
-d_counter = 0
-e_counter = 0
+counter = 0
 
-for i in range(0,10000):
-    a = random.randint(0,1)
-    b = random.randint(0,1)
-    d = random.randint(0,1)
-    e = random.randint(0,1)
+a = random.randint(0,1)
+b = random.randint(0,1)
+d = random.randint(0,1)
+e = random.randint(0,1)
 
-    if not check_a(b, d):
-        a_counter += 1
-    if not check_b(a):
-        b_counter += 1
-    if not check_d(a, e):
-        d_counter += 1
-    if not check_e(d):
-        e_counter += 1
+iterations = 10000
 
+print(a, b, d, e)
 
-print("a: " + str(a_counter))
-print("b: " + str(b_counter))
-print("d: " + str(d_counter))
-print("e: " + str(e_counter))
-print( str((a_counter + b_counter + d_counter + e_counter)/40000))
+for i in range(0,iterations):
+
+    if check_a(b, d):
+        a = 1
+    else:
+        a = 0
+
+    if check_b(a):
+        b = 1
+    else:
+        b = 0
+
+    if check_d(a, e):
+        d = 1
+    else:
+        d = 0
+
+    if check_e(d):
+        e = 1
+    else:
+        e = 0
+    if i % 100 == 0 and i > 1:
+        print(counter/i)
+    if b:
+        counter += 1
+
+print( str((counter)/iterations))
