@@ -37,37 +37,21 @@ def check_e(d):
         return checker <= 0.9
 
 counter = 0
+iterations = 10000
 
 a = random.randint(0,1)
 b = random.randint(0,1)
 d = random.randint(0,1)
 e = random.randint(0,1)
-
-iterations = 10000
-
 print(a, b, d, e)
 
 for i in range(0,iterations):
 
-    if check_a(b, d):
-        a = 1
-    else:
-        a = 0
-
-    if check_b(a):
-        b = 1
-    else:
-        b = 0
-
-    if check_d(a, e):
-        d = 1
-    else:
-        d = 0
-
-    if check_e(d):
-        e = 1
-    else:
-        e = 0
+    a = (1 if check_a(b, d) else 0)
+    b = (1 if check_b(a) else 0)
+    d = (1 if check_d(a, e) else 0)
+    e = (1 if check_e(d) else 0)
+    
     if i % 100 == 0 and i > 1:
         print(counter/i)
     if b:
